@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>前后端分离实践</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../reveal/css/reveal.css">
+    <link rel="stylesheet" href="../reveal/css/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../reveal/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>前后端分离实践</h2>
+            <br>
+            <br>
+
+            <h3></h3>
+
+            <p>
+                <small>Created by <a href="#">陈超</a> / <a href="#">chenchao@99114.com</a>/2016-11-16
+                </small>
+            </p>
+        </section>
+
+        <section>
+            <section data-background="">
+                <h1>what</h1><br>
+
+                <h3>什么是前端后端</h3>
+
+                <h3>什么又是两者的分离</h3>
+            </section>
+            <section data-background="">
+                <h2>关注点</h2><br>
+                <ul>
+                    <li>前端:<p>页面展示,页面交互</p></li>
+                    <li>后端:<p>业务逻辑,数据存取</p></li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>技术栈</h2><br>
+                <ul>
+                    <li>前端:<p>css,html,css,less,sass,js..</p></li>
+                    <li>后端:<p>java,sql,db.队列..</p></li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>从模板的角度看</h2><br>
+                <ul>
+                    <li>前端:<p>模板(template)</p></li>
+                    <li>后端:<p>数据(data)</p></li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>从MVC的角度看</h2><br>
+                <ul>
+                    <li>前端:<p>视图(view) 和 控制器(controller)</p></li>
+                    <li>后端:<p>模型(model)</p></li>
+                </ul>
+            </section>
+        </section>
+
+
+        <section>
+            <section data-background="">
+                <h1>why</h1><br>
+
+                <h3>为什么要前后端分离</h3>
+            </section>
+            <section data-background="">
+                <h2>前端的演化历史</h2><br>
+
+                <h1>↓</h1>
+            </section>
+            <section data-background="">
+                <h2>第一阶段</h2><br>
+
+                <h3>面向HTTP协议开发</h3>
+            </section>
+            <section data-background="">
+                <p>典型的代码</p>
+<pre><code>
+    #include < stdio.h >
+    #include < string.h >
+    main(){
+    printf("Contenttype:text/html/n/n");
+    printf("< html >/n");
+    printf("< head >< title >An HTML Page From a CGI< /title >< /head >/n");
+    printf("< body >/n");
+    printf("< h2 > This is an HTML page generated from with i n a CGI program.. .< /h2 >/n");
+    printf("< hr >< p >/n");
+    printf("< a href="output.html#two" >< b > Go back to out put.html page < /b >< /a >/n");
+    printf("< /body >/n");
+    printf("< /html >/n");
+    fflush(stdout);
+    }
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>特点:</p>
+                <ul>
+                    <li>
+                        依赖少,所有能操作标准输入输出流的程序
+                        都能用来开发web应用C/C++,shell,perl,python等
+                    </li>
+                    <li>
+                        完全不具备扩展性(前提:关注点是页面的变化)
+                    </li>
+                    <li>
+                        不存在前端后端的问题
+                    </li>
+                    <li>
+                        面向HTTP协议开发页面
+                    </li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>第二阶段</h2><br>
+
+                <h3>面向页面开发</h3>
+            </section>
+            <section data-background="">
+                <h2>代表技术(JSP,PHP)</h2><br>
+                <img width="800" height="454" data-src="img/separation/backMvc.jpg" alt="Down arrow">
+            </section>
+            <section data-background="">
+                <p>典型的jsp代码</p>
+<pre><code>
+    < html>
+    < head>< title>Hello World< /title>< /head>
+    < body>
+    Hello World!
+    <% out.println("Your IP address is " + request.getRemoteAddr()); %>
+    < /body>
+    < /html>
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>典型的php代码</p>
+<pre><code>
+    < html >
+    < body >
+    <?php echo "我的第一段 PHP 脚本！";?>
+    < /body >
+    < /html >
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>特点:</p>
+                <ul>
+                    <li>
+                        使用虚拟机或者动态语言的web容器<br>
+                        开发效率高,性能可扩展
+                    </li>
+                    <br>
+                    <li>
+                        数据和视图不分离<br>
+                        前提:关注点是动态和静态数据的分离<br>
+                    </li>
+                    <br>
+                    <li>
+                        出现前端后端的概念<br>
+                        动态数据通过代码嵌入的方式实现<br>
+                        前后端不分离<br>
+                    </li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>第三阶段</h2><br>
+
+                <h3>面向模板开发</h3>
+            </section>
+            <section data-background="">
+                <h2>代表技术</h2><br>
+                <ul>
+                    <li>JSTL</li>
+                    <li>FreeMark</li>
+                    <li>Velocity</li>
+                </ul>
+            </section>
+            <section data-background="">
+                <p>JSTL页面</p>
+<pre><code>
+    < html >
+    < head >< title >使用 JSTL 函数< /title >< /head >
+    < body >
+    < c:set var="theString" value="I am from runoob"/>
+    < c:if test="${fn:contains(theString, 'runoob')}">
+        < p >找到 runoob< p >
+    < /c:if >
+    < /body >
+    < /html >
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>FreeMark</p>
+<pre><code>
+    < html >
+    < head >< title >${title}< /head >
+    < body >
+    < h1 >${title}< /h1 >
+    < p >${exampleObject.name} by ${exampleObject.developer}< /p >
+    < ul >
+        < #list systems as system >
+            < li >${system_index + 1}. ${system.name} from ${system.developer}< /li >
+        < /#list >
+    < /ul >
+    < /body >
+    < /htm l>
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>特点:</p>
+                <ul>
+                    <li>
+                        标签和变量代替代码片段<br>
+                    </li>
+                    <li>
+                        使用后端MVC模式和模板模式来组织代码,提供更高的灵活性<br>
+                    </li>
+                    <li>
+                        模板是比页面更小粒度的组织单元,模板中的标签是前端后端工作的分界点<br>
+                    </li>
+                    <li>
+                        前端和后端在工作内容上分离,后端专注业务逻辑和model数据,
+                        前端关注页面展示和模板标签<br>
+                    </li>
+                    <li>
+                        前端和后端在工作对象上不分离,但是提供了分离的可能<br>
+                        后端专注业务逻辑和model,
+                        前端出静态页面，后端套页面写标签<br>
+                    </li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>第四阶段</h2><br>
+                <h3>面向web应用开发</h3>
+            </section>
+            <section data-background="">
+                <img width="800" height="454" data-src="img/separation/spa.jpg" alt="Down arrow">
+            </section>
+            <section data-background="">
+                <img width="800" height="454" data-src="img/separation/ajax.jpg" alt="Down arrow">
+            </section>
+            <section data-background="">
+                <p>特点:</p>
+                <ul>
+                    <li>
+                        前端模板和前端MVC方案<br>
+                    </li>
+                    <li>
+                        前端使用独立的开发环境和开发工具,前端资源完全静态化<br>
+                    </li>
+                    <li>
+                        后端专注业务逻辑，仅仅提供数据接口<br>
+                    </li>
+                    <li>
+                        前端和后端不是以浏览器和服务端分离,以工作职责和关注点作为分界线<br>
+                    </li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>第五阶段</h2><br>
+                <h3>全栈web开发</h3>
+                <p>代表技术:NodeJs,TypeScript,ES6,react App应用</p>
+            </section>
+            <section data-background="">
+                <img width="590" height="611" data-src="img/separation/nodejs.png" alt="Down arrow">
+            </section>
+            <section data-background="">
+                <p>特点:</p>
+                <ul>
+                    <li>
+                        nodeJS开发环境,nodeJS运行环境<br>
+                    </li>
+                    <li>
+                        前端资源预处理,打包等<br>
+                    </li>
+                    <li>
+                        页面前后端渲染,浏览器和服务端的界限消失,相同的运行环境<br>
+                    </li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>第六阶段</h2><br>
+                <h3>.....</h3>
+            </section>
+
+            <section data-background="">
+                <h2>结论</h2><br>
+                <ul>
+                    <ol>业务决定技术的发展和规范</ol><br>
+                </ul>
+            </section>
+            <section data-background="">
+                <p>前端各阶段的形成原因:</p><br>
+                <ul>
+                    <li>当前的业务需求</li>
+                    <li>现有技术基础</li><br>
+                </ul>
+            </section>
+            <section data-background="">
+                所以,<br>前后端要不要分离，怎么分离还是要看现有的<br><span style="color: yellow">业务需求</span>和<span style="color: yellow">技术积累</span>
+            </section>
+
+        </section>
+
+        <section>
+            <section data-background="">
+                <h1>how</h1><br>
+                <h3>怎么样前后端分离</h3>
+            </section>
+
+            <section data-background="">
+                <h2>要求</h2><br>
+                <p>创造价值,节约成本</p>
+            </section>
+
+            <section data-background="">
+                <h2>具体要求</h2><br>
+                <ul>
+                    <ol><span style="color: yellow">1.满足业务需求</span></ol>
+                    <ul>
+                        <li>性能,体验</li>
+                        <li>SEO,页面加载速度</li>
+                    </ul>
+                    <ol><span style="color: yellow">2.提高开发效率，降低维护成本</span></ol>
+                    <ul>
+                        <li>有相关的开发人员,有较低的学习成本</li>
+                        <li>前端模块化组件化,前端有完整的预处理环境,加快开发速度</li>
+                        <li>前端资源模块化，合理控制复杂度</li>
+                        <li>单独部署等</li>
+                    </ul>
+                    <ol><span style="color: yellow">3.降低沟通成本</span></ol>
+                    <ul>
+                        <li>前端完全掌控前端的开发工作,不再受制于后端</li>
+                        <li>通过接口规范与后端沟通</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section data-background="">
+                <h2>案例一</h2><br>
+                <p>电商手机M站(微信)+移动App开发</p>
+            </section>
+
+            <section data-background="">
+                <h2>前端跨平台解决方案:</h2><br>
+                <ul>
+                    <li>ES6/Typescript</li>
+                    <li>Sass/Less compiling</li>
+                    <li>Cordova</li>
+                    <li>Webpack</li>
+                    <li>Scaffolding</li>
+                    <li>Crosswalk</li>
+                </ul>
+            </section>
+
+            <section data-background="">
+                <h2>案例二</h2><br>
+                <p>pc端后台管理系统</p>
+            </section>
+
+            <section data-background="">
+                <p>vueJs + swagger + SpringBoot</p><br>
+                <ul>
+                    <li>使用nodeJs开发环境</li>
+                    <li>前端功能组件化,资源全静态化</li>
+                    <li>数据完全通过restful来交互</li>
+                </ul>
+            </section>
+
+            <section data-background="">
+<pre><code>
+    项目目录
+    ├── bin
+    ├── dist
+    ├── doc
+    ├── Editor.json
+    ├── index.html
+    ├── node_modules
+    ├── package.json
+    ├── README.md
+    ├── src
+    |    ├── assets
+    |    ├── components
+    |    ├── directives
+    |    ├── filters
+    |    ├── libs
+    |    └── service
+    |
+    └── webpack.config.js
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>src中有各种类型文件</p>
+                <ul>
+                    <li>assets 图标,图片等资源</li>
+                    <li>components 组件</li>
+                    <li>directives 自定义标签</li>
+                    <li>filters 过滤器</li>
+                    <li>service 静态服务类</li>
+                </ul>
+            </section>
+            <section data-background="">
+                <p>关键的components组件:</p>
+<pre><code>
+    <template>
+        <path-editor></path-editor>
+        <layout></layout>
+    </template>
+    <style scoped>
+        .submit-btn {
+            border: none;
+            width: 200px;
+            height: 40px;
+            background: #1762e3;
+            color: #fff;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+    <script type="text/babel">
+        import Path from '../components/path.vue'
+        import layout from '../components/layout.vue'
+        //导出定义递归组件元素树
+        export default {
+            components: {
+                pathEditor: Path,
+                layout: layout
+            },
+            methods: {},
+            events: {
+                'selectNode': function (selectNode) {
+                    this.$broadcast('edit', selectNode.id + "")
+                }
+            }
+        }
+    </script>
+</code></pre>
+            </section>
+            <section data-background="">
+                <img width="800" height="454" data-src="img/separation/SwaggerGenerateClient.png" alt="Down arrow">
+            </section>
+            <section data-background="">
+                <p>接口规范(swagger配置):</p>
+<pre><code>
+    {
+    "swagger": "2.0",
+    "info": {
+    "title": "Uber API",
+    "description": "Move your app forward with the Uber API",
+    "version": "1.0.0"
+    },
+    "host": "api.uber.com",
+    "schemes": [
+    "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+    "application/json"
+    ],
+    "paths": {
+    "/products": {
+    "get": {
+    "summary": "Product Types",
+    "description": "The Products endpoint returns information about the *Uber* products\noffered at a given location. The response includes the display name\nand other details about each product, and lists the products in the\nproper display order.\n",
+    "parameters": [
+    {
+    "name": "latitude",
+    "in": "query",
+    "description": "Latitude component of location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "longitude",
+    "in": "query",
+    "description": "Longitude component of location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    }
+    ],
+    "tags": [
+    "Products"
+    ],
+    "responses": {
+    "200": {
+    "description": "An array of products",
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/definitions/Product"
+    }
+    }
+    },
+    "default": {
+    "description": "Unexpected error",
+    "schema": {
+    "$ref": "#/definitions/Error"
+    }
+    }
+    }
+    }
+    },
+    "/estimates/price": {
+    "get": {
+    "summary": "Price Estimates",
+    "description": "The Price Estimates endpoint returns an estimated price range\nfor each product offered at a given location. The price estimate is\nprovided as a formatted string with the full price range and the localized\ncurrency symbol.<br><br>The response also includes low and high estimates,\nand the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for\nsituations requiring currency conversion. When surge is active for a particular\nproduct, its surge_multiplier will be greater than 1, but the price estimate\nalready factors in this multiplier.\n",
+    "parameters": [
+    {
+    "name": "start_latitude",
+    "in": "query",
+    "description": "Latitude component of start location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "start_longitude",
+    "in": "query",
+    "description": "Longitude component of start location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "end_latitude",
+    "in": "query",
+    "description": "Latitude component of end location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "end_longitude",
+    "in": "query",
+    "description": "Longitude component of end location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    }
+    ],
+    "tags": [
+    "Estimates"
+    ],
+    "responses": {
+    "200": {
+    "description": "An array of price estimates by product",
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/definitions/PriceEstimate"
+    }
+    }
+    },
+    "default": {
+    "description": "Unexpected error",
+    "schema": {
+    "$ref": "#/definitions/Error"
+    }
+    }
+    }
+    }
+    },
+    "/estimates/time": {
+    "get": {
+    "summary": "Time Estimates",
+    "description": "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+    "parameters": [
+    {
+    "name": "start_latitude",
+    "in": "query",
+    "description": "Latitude component of start location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "start_longitude",
+    "in": "query",
+    "description": "Longitude component of start location.",
+    "required": true,
+    "type": "number",
+    "format": "double"
+    },
+    {
+    "name": "customer_uuid",
+    "in": "query",
+    "type": "string",
+    "format": "uuid",
+    "description": "Unique customer identifier to be used for experience customization."
+    },
+    {
+    "name": "product_id",
+    "in": "query",
+    "type": "string",
+    "description": "Unique identifier representing a specific product for a given latitude & longitude."
+    }
+    ],
+    "tags": [
+    "Estimates"
+    ],
+    "responses": {
+    "200": {
+    "description": "An array of products",
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/definitions/Product"
+    }
+    }
+    },
+    "default": {
+    "description": "Unexpected error",
+    "schema": {
+    "$ref": "#/definitions/Error"
+    }
+    }
+    }
+    }
+    },
+    "/me": {
+    "get": {
+    "summary": "User Profile",
+    "description": "The User Profile endpoint returns information about the Uber user that has authorized with the application.",
+    "tags": [
+    "User"
+    ],
+    "responses": {
+    "200": {
+    "description": "Profile information for a user",
+    "schema": {
+    "$ref": "#/definitions/Profile"
+    }
+    },
+    "default": {
+    "description": "Unexpected error",
+    "schema": {
+    "$ref": "#/definitions/Error"
+    }
+    }
+    }
+    }
+    },
+    "/history": {
+    "get": {
+    "summary": "User Activity",
+    "description": "The User Activity endpoint returns data about a user's lifetime activity with Uber. The response will include pickup locations and times, dropoff locations and times, the distance of past requests, and information about which products were requested.<br><br>The history array in the response will have a maximum length based on the limit parameter. The response value count may exceed limit, therefore subsequent API requests may be necessary.",
+    "parameters": [
+    {
+    "name": "offset",
+    "in": "query",
+    "type": "integer",
+    "format": "int32",
+    "description": "Offset the list of returned results by this amount. Default is zero."
+    },
+    {
+    "name": "limit",
+    "in": "query",
+    "type": "integer",
+    "format": "int32",
+    "description": "Number of items to retrieve. Default is 5, maximum is 100."
+    }
+    ],
+    "tags": [
+    "User"
+    ],
+    "responses": {
+    "200": {
+    "description": "History information for the given user",
+    "schema": {
+    "$ref": "#/definitions/Activities"
+    }
+    },
+    "default": {
+    "description": "Unexpected error",
+    "schema": {
+    "$ref": "#/definitions/Error"
+    }
+    }
+    }
+    }
+    }
+    },
+    "definitions": {
+    "Product": {
+    "type": "object",
+    "properties": {
+    "product_id": {
+    "type": "string",
+    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+    },
+    "description": {
+    "type": "string",
+    "description": "Description of product."
+    },
+    "display_name": {
+    "type": "string",
+    "description": "Display name of product."
+    },
+    "capacity": {
+    "type": "string",
+    "description": "Capacity of product. For example, 4 people."
+    },
+    "image": {
+    "type": "string",
+    "description": "Image URL representing the product."
+    }
+    }
+    },
+    "PriceEstimate": {
+    "type": "object",
+    "properties": {
+    "product_id": {
+    "type": "string",
+    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles"
+    },
+    "currency_code": {
+    "type": "string",
+    "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
+    },
+    "display_name": {
+    "type": "string",
+    "description": "Display name of product."
+    },
+    "estimate": {
+    "type": "string",
+    "description": "Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \"Metered\" for TAXI."
+    },
+    "low_estimate": {
+    "type": "number",
+    "description": "Lower bound of the estimated price."
+    },
+    "high_estimate": {
+    "type": "number",
+    "description": "Upper bound of the estimated price."
+    },
+    "surge_multiplier": {
+    "type": "number",
+    "description": "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier."
+    }
+    }
+    },
+    "Profile": {
+    "type": "object",
+    "properties": {
+    "first_name": {
+    "type": "string",
+    "description": "First name of the Uber user."
+    },
+    "last_name": {
+    "type": "string",
+    "description": "Last name of the Uber user."
+    },
+    "email": {
+    "type": "string",
+    "description": "Email address of the Uber user"
+    },
+    "picture": {
+    "type": "string",
+    "description": "Image URL of the Uber user."
+    },
+    "promo_code": {
+    "type": "string",
+    "description": "Promo code of the Uber user."
+    }
+    }
+    },
+    "Activity": {
+    "type": "object",
+    "properties": {
+    "uuid": {
+    "type": "string",
+    "description": "Unique identifier for the activity"
+    }
+    }
+    },
+    "Activities": {
+    "type": "object",
+    "properties": {
+    "offset": {
+    "type": "integer",
+    "format": "int32",
+    "description": "Position in pagination."
+    },
+    "limit": {
+    "type": "integer",
+    "format": "int32",
+    "description": "Number of items to retrieve (100 max)."
+    },
+    "count": {
+    "type": "integer",
+    "format": "int32",
+    "description": "Total number of items available."
+    },
+    "history": {
+    "type": "array",
+    "items": {
+    "$ref": "#/definitions/Activity"
+    }
+    }
+    }
+    },
+    "Error": {
+    "type": "object",
+    "properties": {
+    "code": {
+    "type": "integer",
+    "format": "int32"
+    },
+    "message": {
+    "type": "string"
+    },
+    "fields": {
+    "type": "string"
+    }
+    }
+    }
+    }
+    }
+</code></pre>
+            </section>
+
+            <section data-background="">
+                <p> 生成的客户端和服务端代码:</p>
+<pre><code>
+    <dependency>
+        <groupId>com.wk.p3.manager</groupId>
+        <artifactId>swagger-api-client</artifactId>
+        <version>1.0.0</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.wk.p3.manager</groupId>
+        <artifactId>swagger-api-server</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</code></pre>
+            </section>
+            <section data-background="">
+                <p>spring 中拦截后实现我们自己的逻辑:</p>
+<pre><code>
+interface api{
+    @ApiOperation(value = "添加一个node", notes = "添加一个node实体到后台", response = Node.class, tags={  })
+    @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "successful operation", response = Node.class),
+    @ApiResponse(code = 405, message = "Invalid input", response = Node.class) })
+    @RequestMapping(value = "/node",
+    produces = { "application/json" },
+    consumes = { "application/json" },
+    method = RequestMethod.POST)
+    ResponseEntity< Node > addNode(@ApiParam(value = "node实体" ,required=true ) @RequestBody Node body);
+}
+</code></pre>
+            </section>
+
+            <section data-background="">
+                <h2>案例三</h2><br>
+                <p>nodeJs前后端 + 后端</p>
+                <ul>
+                    <li>nodeJs全栈web开发,干净纯粹</li>
+                    <li>nodeJs和后端通信问题</li>
+                </ul>
+            </section>
+            <section data-background="">
+                <h2>完</h2><br>
+            </section>
+        </section>
+
+
+    </div>
+
+</div>
+
+<script src="../reveal/lib/js/head.min.js"></script>
+<script src="../reveal/js/reveal.js"></script>
+
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            {
+                src: '../reveal/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: '../reveal/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../reveal/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: '../reveal/plugin/zoom-js/zoom.js', async: true},
+            {src: '../reveal/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

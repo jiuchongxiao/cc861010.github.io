@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>微服务系列之 - 服务连接</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+<section>
+    <h2>微服务系列之 - 服务连接</h2>
+    <br>
+    <br>
+
+    <h3></h3>
+
+    <p>
+        <small>Created by <a href="#">陈超</a> / <a href="http://twitter.com/hakimel">chenchao@99114.com</a>
+        </small>
+    </p>
+</section>
+
+<section>
+    <section data-background="">
+        <img width="800" height="600" data-src="img/service.png" alt="Down arrow">
+    </section>
+    <section data-background="">
+        <img width="800" height="600" data-src="img/soa-2-640.png" alt="Down arrow">
+    </section>
+    <section data-background="">
+        <img width="800" height="600" data-src="img/soa-4-isolation-640.png" alt="Down arrow">
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>服务连接要求</h2></br>
+        <ul>
+            <li>稳定</li>
+            <li>性能</li>
+            <li>简单</li>
+        </ul>
+    </section>
+    <section>
+        <h2>性能</h2></br>
+        <ul>
+            <li>短链接-使用轻量级的http协议</li>
+            <li>使用RestFul规范</li>
+        </ul>
+    </section>
+    <section>
+        <h2>稳定</h2></br>
+        <ul>
+            <li>容错</li>
+            <li>弹性</li>
+            <li>高可用</li>
+        </ul>
+    </section>
+    <section>
+        <h2>简单</h2></br>
+        <ul>
+            <li>开箱即用</li>
+            <li>傻瓜式操作</li>
+            <li>无需复杂的配置</li>
+        </ul>
+    </section>
+</section>
+<section>
+    <p>我们的方案</p></br>
+    <p style="font-size: larger">Hystrix + Robbin + Feign</p>
+</section>
+<section>
+    <section>
+        <h4>Hystrix(豪猪)</h4>
+        <img width="800" height="300" data-src="img/hystrix.png" alt="Down arrow">
+    </section>
+    <section>
+        <h2>Hystrix(豪猪)</h2>
+        <ul>
+            <li>
+                Give protection from and control over latency and failure from dependencies accessed
+                (typically over the network) via third-party client libraries.
+            </li>
+            <li>Stop cascading failures in a complex distributed system.</li>
+            <li>Fail fast and rapidly recover.</li>
+            <li>Fallback and gracefully degrade when possible</li>
+            <li>Enable near real-time monitoring, alerting, and operational control.</li>
+        </ul>
+    </section>
+    <section>
+        <p>Hystrix流程图</p>
+        <img width="1000" height="500" data-src="img/hystrix-command-flow-chart.png" alt="Down arrow">
+    </section>
+    <section>
+        <h2>具体流程</h2>
+        <ul>
+            <li>Construct a HystrixCommand or HystrixObservableCommand Object</li>
+            <li>Execute the Command</li>
+            <li>Is the Response Cached?</li>
+            <li>Is the Circuit Open?</li>
+            <li>Is the Thread Pool/Queue/Semaphore Full?</li>
+            <li>HystrixObservableCommand.construct() or HystrixCommand.run()</li>
+            <li>Calculate Circuit Health</li>
+            <li>Get the Fallback</li>
+            <li>Return the Successful Response</li>
+        </ul>
+    </section>
+    <section>
+        <p>Hystrix监控-dashboard</p>
+        <img width="1000" height="500" data-src="img/dashboard-example-1280.png" alt="Down arrow">
+    </section>
+    <section>
+        <p>监控细节</p>
+        <img width="1000" height="500" data-src="img/dashboard-annoted-circuit-640.png" alt="Down arrow">
+    </section>
+</section>
+
+<section  >
+    <section>
+        <h2>Ribbon(带子)</h2>
+        <p>云端进程间通信工具</p>
+        <ul>
+            <li>Multiple and pluggable load balancing rules</li>
+            <li>Integration with service discovery</li>
+            <li>Built-in failure resiliency</li>
+            <li>Clients integrated with load balancers</li>
+            <li>Archaius configuration driven client factory</li>
+        </ul>
+        <br>
+    </section>
+    <section>
+        <p>配置文件client.properties</p>
+<pre><code class="hljs">
+# Max number of retries on the same server (excluding the first try)
+sample-client.ribbon.MaxAutoRetries=1
+# Max number of next servers to retry (excluding the first server)
+sample-client.ribbon.MaxAutoRetriesNextServer=1
+# Whether all operations can be retried for this client
+sample-client.ribbon.OkToRetryOnAllOperations=true
+# Interval to refresh the server list from the source
+sample-client.ribbon.ServerListRefreshInterval=2000
+# Connect timeout used by Apache HttpClient
+sample-client.ribbon.ConnectTimeout=3000
+# Read timeout used by Apache HttpClient
+sample-client.ribbon.ReadTimeout=3000
+# Initial list of servers, can be changed via Archaius dynamic property at runtime
+sample-client.ribbon.listOfServers=www.microsoft.com:80,www.yahoo.com:80,www.google.com:80
+</code></pre>
+    </section>
+    <section>
+<p>测试代码</p>
+<pre><code class="hljs">
+public static void main(String[] args) throws Exception {
+    ConfigurationManager.loadPropertiesFromResources("client.properties");
+    RestClient client = (RestClient) ClientFactory.getNamedClient("sample-client");
+    HttpClientRequest request = HttpClientRequest.newBuilder().setUri(new URI("/")).build();
+    for (int i = 0; i < 20; i++)  {
+        HttpClientResponse response = client.executeWithLoadBalancer(request);
+        System.out.println("Status code for " +
+            response.getRequestedURI() + "  :" +
+            response.getStatus());
+    }
+    ZoneAwareLoadBalancer lb = (ZoneAwareLoadBalancer) client.getLoadBalancer();
+    System.out.println(lb.getLoadBalancerStats());
+ }
+</code></pre>
+    </section>
+</section>
+
+
+<section>
+    <!--<section style="text-align: left;">-->
+    <section>
+        <h2>Feign(伪装)</h2>
+        <p style="text-align: left;">
+            Feign aims to connect your code to http apis with minimal overhead and code
+        </p>
+        </section>
+    <section>
+
+<pre><code class="hljs">
+    class Contributor {
+        String login;
+        int contributions;
+    }
+</code></pre>
+<pre><code class="hljs">
+    interface GitHub {
+        @RequestLine("GET /repos/{owner}/{repo}/contributors")
+        List contributors(
+            @Param("owner") String owner,
+            @Param("repo") String repo
+        );
+    }
+</code></pre>
+<pre><code class="hljs">
+    GitHub github = Feign.builder().decoder(new GsonDecoder())
+    .target(GitHub.class, "https://api.github.com");
+
+</code></pre>
+
+</section>
+</section>
+
+
+
+<section>
+
+    <section>
+        <h3>具体实施步骤</h3></br>
+        <ul>服务端
+            <li>一.接口开发</li><br>
+
+            客户端
+            <li>二.准备工作</li>
+            <li>三.客户端接口类配置</li>
+            <li>四.接口调用</li>
+        </ul>
+    </section>
+
+    <section style="text-align: left">
+            <P style="text-align: center">一.接口开发</P>
+    <pre><code class="hljs">
+        例子中使用jersey实现的restFul风格接口类,UpperResource.java
+        spring MVC等其他框架页可以很简单的实现
+    </code></pre>
+    <pre><code class="hljs">
+        @Path("/")
+        public class UpperResource {
+            @GET
+            @Path("/upperReaches/{thatCategoryId}")
+            @Produces(MediaType.APPLICATION_JSON)
+            public Response upperReaches(
+                @PathParam("thatCategoryId") String thatCategoryId,
+                @QueryParam("size") String size,
+                @QueryParam("pageNumber") String pageNumber,
+                @QueryParam("order")String order,
+                @QueryParam("sort") String sort
+            ){
+            //具体实现
+        }
+
+            @GET
+            @Path("/upperReaches/count/{thatCategoryId}")
+            @Produces(MediaType.APPLICATION_JSON)
+            public Response upperReachesCount(
+                @PathParam("thatCategoryId") String thatCategoryId){
+            //具体实现
+        }
+
+    </code></pre>
+    </section>
+
+    <section style="text-align: left">
+        <P style="text-align: center">二.准备工作</P>
+    <pre><code class="hljs">
+        1.使用邮件中统一的maven配置Settings.xml文件
+    </code></pre>
+    <pre><code class="hljs">
+        2.在项目中添加依赖Jar
+        <dependency>
+            <groupId>api-proxy-client</groupId>
+            <artifactId>api-proxy-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <classifier>shaded</classifier>
+        </dependency>
+    </code></pre>
+    <pre><code class="hljs">
+        注意:当项目jar包发生冲突时使用
+        <classifier>shaded</classifier>
+    </code></pre>
+    </section>
+
+
+
+
+    <section style="text-align: left">
+        <P style="text-align: center">三.客户端接口类</P>
+    <pre><code class="hljs">
+/**
+* 上下游接口
+* Created by cc on 16-5-18.
+*/
+public interface UpperReaches{
+
+    /**
+    * 根据某个输入类目id取得上游关联列表
+    * @param thatCategoryId    输入的类目ID
+    * @param size              分页大小
+    * @param pageNumber        分页页码
+    * @param order             分页排序 降序(DESC)，升序(ASC)
+    * @param sort              排序字段名称，比如categoryIdName或者correlationDegree
+    * @return
+    */
+    @RequestLine("GET /upperReaches/{thatCategoryId}?size={size}&pageNumber={pageNumber}&order={order}&sort={sort}")
+    HystrixCommand&lt;List&lt;ReacheNode&gt;&gt; getUpperReaches(
+        @Param("thatCategoryId") String thatCategoryId,
+        @Param("size") int size,
+        @Param("pageNumber") long pageNumber,
+        @Param("order") String order,
+        @Param("sort") String sort
+    );
+
+    /**
+    * 根据某个输入类目id取得上游关联总数
+    * @param thatCategoryId    输入的类目ID
+    * @return
+    */
+    @RequestLine("GET /upperReaches/count/{thatCategoryId}")
+    HystrixCommand&lt;Integer&gt; getUpperReachesCount(
+        @Param("thatCategoryId") String thatCategoryId
+    );
+}
+    </code></pre>
+    </section>
+    <section style="text-align: left">
+        <P style="text-align: center">四.接口调用</P>
+    <pre><code class="hljs">
+    //实现一个回退接口类
+    UpperReaches fallback =new UpperReaches(){
+        @Override
+        public HystrixCommand&lt;List&lt;ReacheNode&gt;&gt; getUpperReaches(
+            String thatCategoryId,
+            int size,
+            long pageNumber,
+            String order,
+            String sort) {
+            //具体实现
+        }
+        @Override
+        public HystrixCommand&lt;Integer&gt; getUpperReachesCount(
+            String thatCategoryId) {
+            //具体实现
+        }
+    };
+    </code></pre>
+    <pre><code class="hljs">
+    //调用方法
+    List&lt;ReacheNode&gt; nodes=Client.api(UpperReaches.class, fallback)
+        .getUpperReaches("109102", 2, 1, null, "ASC")
+        .execute();
+    </code></pre>
+    </section>
+
+</section>
+
+
+
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
