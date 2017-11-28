@@ -1,10 +1,104 @@
 <section>
-    <h2>dubbo服务开发</h2>
+    <h2>Service Mesh</h2>
     <br>
     <br>
     <h3></h3>
     <p>
-        <small>Created by <a href="#">陈超</a> / <a href="#">chenchao@99114.com</a>/2017-07-19
+        <small>Created by <a href="#">陈超</a> / <a href="#">chenchao@99114.com</a>/2017-11-28
         </small>
     </p>
 </section>
+
+<section>
+    <section>
+        <h2>Microservices</h2>
+        <small>
+            Microservices is a variant of the service-oriented architecture (SOA) architectural
+            style that structures an application as a collection of loosely coupled services.
+            In a microservices architecture, services should be fine-grained and the protocols
+            should be lightweight. The benefit of decomposing an application into different smaller
+            services is that it improves modularity and makes the application easier to understand,
+            develop and test. It also parallelizes development by enabling small autonomous teams
+            to develop, deploy and scale their respective services independently.It also allows the
+            architecture of an individual service to emerge through continuous refactoring.
+            Microservices-based architectures enable continuous delivery and deployment.
+        </small>
+        <br>
+        <small>
+            Services in a microservice architecture (MSA)[4] are often processes that communicate
+            with each other over a network in order to fulfill a goal using technology-agnostic
+            protocols such as HTTP. However, services might also use other kinds of
+            inter-process communication mechanisms such as shared memory.[9] Services might also
+            run within the same process as, for example, OSGI bundles.
+            Services in a microservice architecture should be independently deployable.[10]
+            The services are easy to replace.
+            Services are organized around capabilities, e.g., user interface front-end,
+            recommendation, logistics, billing, etc.
+            Services can be implemented using different programming languages, databases,
+            hardware and software environment, depending on what fits best.
+            Services are small in size, messaging enabled, bounded by contexts, autonomously developed,
+            independently deployable, decentralized and built and released with automated processes.
+        </small>
+        <br>
+        <br>
+        <small>References : https://en.wikipedia.org/wiki/Microservices</small>
+    </section>
+    <section>
+        <h2>微服务(microservice)</h2>
+        <ul>
+            <li>面向服务架构service-oriented architecture (SOA)</li>
+            <li>细粒度(fine-grained)</li>
+            <li>协议轻量级(lightweight protocols)</li>
+            <li>业务划分服务(organized around capabilities</li>
+            <li>模块化(improves modularity)</li>
+            <li>独立部署替换,分布式部署</li>
+            <li>持续交付和部署(enable continuous delivery and deployment)</li>
+        </ul>
+        <p>比如:spring cloud</p>
+    </section>
+    <section>
+        <h2>面向服务架构(SOA)</h2>
+        <ul>
+            <li>标准化接口,生命周期长</li>
+            <li>服务抽象，独立，无状态</li>
+            <li>服务间低耦合,正交</li>
+            <li>服务发现,引用即可调用</li>
+            <li>服务可组合，可重用</li>
+        </ul>
+        <p>比如:dubbo</p>
+    </section>
+</section>
+
+<section>
+    <h2>微服务基本组成</h2>
+    <img src="ppts/serviceMesh/m.png" width="50%" height="40%">
+</section>
+
+<section>
+    <section><h2>微服务设计模式</h2></section>
+    <section>
+        <h2>代理设计模式</h2>
+        <img src="ppts/serviceMesh/代理设计模式.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>分支设计模式</h2>
+        <img src="ppts/serviceMesh/分支设计模式.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>异步消息传递设计模式</h2>
+        <img src="ppts/serviceMesh/异步消息传递设计模式.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>数据共享设计模式</h2>
+        <img src="ppts/serviceMesh/数据共享设计模式.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>聚合设计模式</h2>
+        <img src="ppts/serviceMesh/聚合设计模式.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>链式设计模式</h2>
+        <img src="ppts/serviceMesh/链式设计模式.png" width="50%" height="40%">
+    </section>
+</section>
+
