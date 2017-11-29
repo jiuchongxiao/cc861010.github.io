@@ -10,63 +10,63 @@
 </section>
 
 <section>
-    <section>
-        <h2>Microservices</h2>
-        <small>
-            Microservices is a variant of the service-oriented architecture (SOA) architectural
-            style that structures an application as a collection of loosely coupled services.
-            In a microservices architecture, services should be fine-grained and the protocols
-            should be lightweight. The benefit of decomposing an application into different smaller
-            services is that it improves modularity and makes the application easier to understand,
-            develop and test. It also parallelizes development by enabling small autonomous teams
-            to develop, deploy and scale their respective services independently.It also allows the
-            architecture of an individual service to emerge through continuous refactoring.
-            Microservices-based architectures enable continuous delivery and deployment.
-        </small>
-        <br>
-        <small>
-            Services in a microservice architecture (MSA)[4] are often processes that communicate
-            with each other over a network in order to fulfill a goal using technology-agnostic
-            protocols such as HTTP. However, services might also use other kinds of
-            inter-process communication mechanisms such as shared memory.[9] Services might also
-            run within the same process as, for example, OSGI bundles.
-            Services in a microservice architecture should be independently deployable.[10]
-            The services are easy to replace.
-            Services are organized around capabilities, e.g., user interface front-end,
-            recommendation, logistics, billing, etc.
-            Services can be implemented using different programming languages, databases,
-            hardware and software environment, depending on what fits best.
-            Services are small in size, messaging enabled, bounded by contexts, autonomously developed,
-            independently deployable, decentralized and built and released with automated processes.
-        </small>
-        <br>
-        <br>
-        <small>References : https://en.wikipedia.org/wiki/Microservices</small>
-    </section>
-    <section>
-        <h2>微服务(microservice)</h2>
-        <ul>
-            <li>面向服务架构service-oriented architecture (SOA)</li>
-            <li>细粒度(fine-grained)</li>
-            <li>协议轻量级(lightweight protocols)</li>
-            <li>业务划分服务(organized around capabilities</li>
-            <li>模块化(improves modularity)</li>
-            <li>独立部署替换,分布式部署</li>
-            <li>持续交付和部署(enable continuous delivery and deployment)</li>
-        </ul>
-        <p>比如:spring cloud</p>
-    </section>
-    <section>
-        <h2>面向服务架构(SOA)</h2>
-        <ul>
-            <li>标准化接口,生命周期长</li>
-            <li>服务抽象，独立，无状态</li>
-            <li>服务间低耦合,正交</li>
-            <li>服务发现,引用即可调用</li>
-            <li>服务可组合，可重用</li>
-        </ul>
-        <p>比如:dubbo</p>
-    </section>
+    <h2>Microservices</h2>
+    <small>
+        Microservices is a variant of the service-oriented architecture (SOA) architectural
+        style that structures an application as a collection of loosely coupled services.
+        In a microservices architecture, services should be fine-grained and the protocols
+        should be lightweight. The benefit of decomposing an application into different smaller
+        services is that it improves modularity and makes the application easier to understand,
+        develop and test. It also parallelizes development by enabling small autonomous teams
+        to develop, deploy and scale their respective services independently.It also allows the
+        architecture of an individual service to emerge through continuous refactoring.
+        Microservices-based architectures enable continuous delivery and deployment.
+    </small>
+    <br>
+    <small>
+        Services in a microservice architecture (MSA)[4] are often processes that communicate
+        with each other over a network in order to fulfill a goal using technology-agnostic
+        protocols such as HTTP. However, services might also use other kinds of
+        inter-process communication mechanisms such as shared memory.[9] Services might also
+        run within the same process as, for example, OSGI bundles.
+        Services in a microservice architecture should be independently deployable.[10]
+        The services are easy to replace.
+        Services are organized around capabilities, e.g., user interface front-end,
+        recommendation, logistics, billing, etc.
+        Services can be implemented using different programming languages, databases,
+        hardware and software environment, depending on what fits best.
+        Services are small in size, messaging enabled, bounded by contexts, autonomously developed,
+        independently deployable, decentralized and built and released with automated processes.
+    </small>
+    <br>
+    <br>
+    <small>References : https://en.wikipedia.org/wiki/Microservices</small>
+</section>
+
+<section>
+    <h2>微服务(microservice)</h2>
+    <ul>
+        <li>面向服务架构service-oriented architecture (SOA)</li>
+        <li>细粒度(fine-grained)</li>
+        <li>协议轻量级(lightweight protocols)</li>
+        <li>业务划分服务(organized around capabilities</li>
+        <li>模块化(improves modularity)</li>
+        <li>独立部署替换,分布式部署</li>
+        <li>持续交付和部署(enable continuous delivery and deployment)</li>
+    </ul>
+    <p>比如:spring cloud</p>
+</section>
+
+<section>
+    <h2>面向服务架构(SOA)</h2>
+    <ul>
+        <li>标准化接口,生命周期长</li>
+        <li>服务抽象，独立，无状态</li>
+        <li>服务间低耦合,正交</li>
+        <li>服务发现,引用即可调用</li>
+        <li>服务可组合，可重用</li>
+    </ul>
+    <p>比如:dubbo</p>
 </section>
 
 <section>
@@ -102,3 +102,138 @@
     </section>
 </section>
 
+<section>
+    <h2>微服务先决条件(按照优先级从上到下)</h2>
+    <ul>
+        <li>计算资源的快速分配</li>
+        <li>基本的监控</li>
+        <li>快速部署</li>
+        <li>易于分配的存储</li>
+        <li>易于访问的外围</li>
+        <li>认证和授权</li>
+        <li>标准化的RPC</li>
+    </ul>
+    总结：
+    <ul>
+        <li>完善的微服务相关基础设施</li>
+        <li>虚拟化容器化的运维自动化</li>
+    </ul>
+</section>
+
+<section>
+    <h2>微服务集群工具</h2>
+    <ul>
+        <li>千节点集群，少定制：使用开源 Kubernetes （细粒度设计，契合微服务思想）</li>
+        <li>万节点集群，多定制：使用 Mesos + Marathon （双层调度好犀利）</li>
+        <li>万节点集群，IT 能力强：深度定制 Kubernetes （如网易云）</li>
+        <li>万节点集群，IT 能力强：深入掌握使用 DC/OS （DC/OS 在最基础的 Marathon 和 Mesos 之上添加了很多的组件）</li>
+        <li>大数据集群：Spark on Mesos （建议只基于容器部署计算部分，数据部分另行部署）</li>
+    </ul>
+    链接：https://www.zhihu.com/question/53751176/answer/250275995
+</section>
+
+<section>
+    <section>
+        <h2>深入微服务</h2>
+        <p>microService --> service mesh</p>
+    </section>
+    <section>
+        <h2>简单微服务</h2>
+        <img src="ppts/serviceMesh/microservice.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>服务发现与错误熔断</h2>
+        <img src="ppts/serviceMesh/microservice1.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>错误熔断</h2>
+        <img src="ppts/serviceMesh/hystrix-command-flow.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>服务发现(负载均衡)</h2>
+        <ul>
+            <li>客户端服务发现(client-side)</li>
+            <li>服务端服务发现(server-side)</li>
+            <li>后备服务发现(Lookaside)</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Don't Repeat Yourself (D.R.Y)</h2>
+        <img src="ppts/serviceMesh/microservice2.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>隔离出公共部分</h2>
+        <img src="ppts/serviceMesh/microservice3.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>微服无形成网格(mesh)</h2>
+        <img src="ppts/serviceMesh/microservice4.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>进一步隔离-网格透明化</h2>
+        <img src="ppts/serviceMesh/microservice5.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>网格控制</h2>
+        <img src="ppts/serviceMesh/microservice6.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>服务网格(service mesh)</h2>
+        <img src="ppts/serviceMesh/microservice7.png" width="50%" height="40%">
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>envoy</h2>
+        <ul>
+            <li>proxy</li>
+            <li>communication bus for large modern service oriented architectures</li>
+        </ul>
+    </section>
+    <section>
+        <h2>features</h2>
+        <ul>
+            <li>Out of process architecture</li>
+            <li>Modern C++11 code base</li>
+            <li>L3/L4/L7 filter architecture,L7 routing</li>
+            <li>First class HTTP/2 (gRPC) support</li>
+            <li>Service discovery</li>
+            <li>Health checking</li>
+            <li>Advanced load balancing</li>
+            <li>Front/edge proxy support</li>
+            <li>Best in class observability</li>
+            <li>Dynamic configuration</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Front Proxy Demo</h2>
+        <img src="ppts/serviceMesh/frontProxy.svg">
+
+    </section>
+    <section>
+        <h4>Demo</h4>
+        git clone https://github.com/envoyproxy/envoy.git --depth=1
+        cd envoy/examples/front-proxy/
+
+        #启动：
+        docker-compose -f docker-compose.yml up -d
+
+        #
+        curl http://localhost:8001/
+
+        #service1
+        curl http://localhost:8000/service/1
+
+        #service2
+        curl http://localhost:8000/service/2
+
+        #停止：
+        docker-compose -f docker-compose.yml down
+    </section>
+</section>
+
+
+<section>
+    http://philcalcado.com/2017/08/03/pattern_service_mesh.html
+</section>
