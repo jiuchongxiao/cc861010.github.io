@@ -459,21 +459,110 @@ networks:
 </section>
 
 <section data-markdown>
-    ## Abstracting
-    envoy  ==>  istio
+    ## 同类产品
     * nginmesh
     * https://github.com/nginmesh/nginmesh
-    * linkerd-istio
-    * https://buoyant.io/2017/07/11/linkerd-istio/
-</section>
-
-
-<section>
-    <h2>istio</h2>
-    <img src="ppts/serviceMesh/arch.svg" width="50%" height="40%">
+    * linkerd
+    * https://linkerd.io
+    * istio
+    * https://istio.io
 </section>
 
 <section>
     <h2>nginmesh</h2>
     <img src="ppts/serviceMesh/nginx_sidecar.png" width="50%" height="40%">
+</section>
+
+<section>
+    <section>
+        ## Linkerd
+        Linkerd is an open source network proxy designed to be deployed as a service mesh:
+        a dedicated layer for managing, controlling,
+        and monitoring service-to- service communication within an application.
+    </section>
+    <section>
+        <h2>linkerd</h2>
+        <img src="ppts/serviceMesh/linkerd2.png" width="50%" height="40%">
+    </section>
+    <section>
+        <h2>linkerd</h2>
+        <img src="ppts/serviceMesh/linkerd1.png" width="50%" height="40%">
+    </section>
+</section>
+
+<section>
+    <section data-markdown>
+        ## Abstracting
+        envoy  ==>  istio
+    </section>
+    <section>
+        <h2>istio</h2>
+        <img src="ppts/serviceMesh/arch.jpg" width="50%" height="40%">
+    </section>
+    <section data-markdown>
+        ## 主要由以下组件构成
+        * Envoy：Lyft开源的高性能代理总线，支持动态服务发现、负载均衡、TLS终止、HTTP/2和gPRC代理、健康检查、性能测量等功能。Envoy以sidecar的方式部署在相关的服务的Pod中。
+        * Mixer：负责访问控制、执行策略并从Envoy代理中收集遥测数据。Mixer支持灵活的插件模型，方便扩展
+        * Pilot：用户和Istio的接口，验证用户提供的配置和路由策略并发送给Istio组件，管理Envoy示例的生命周期
+        * Istio-Auth：提供服务间和终端用户的认证机制
+    </section>
+    <section data-markdown>
+        ## 整体功能
+        * 无需对现有服务进行变更
+        * 支持 http 1.1/2、gRPC 以及 TCP 流量的负载均衡和故障转移
+        * 可替换的组件
+        * 流量监控
+        * 可提供身份认证功能
+        * 可定制的路由规则
+        * 错误处理，例如超时、重试、访问量控制、健康检查和熔断器等。
+    </section>
+    <section data-markdown>
+        <h2>Pilot</h2>
+        <img src="ppts/serviceMesh/pilot.png" width="50%" height="40%">
+    </section>
+    <section data-markdown>
+        ## Pilot
+        * Envoy API负责和Envoy的通讯, 主要是发送服务发现信息和流量控制规则给Envoy
+        * Envoy提供服务发现，负载均衡池和路由表的动态更新的API。解耦Istio和Envoy
+        * Polit定了一个抽象模型，以从特定平台细节中解耦，为跨平台提供基础
+        * Platform Adapter则是这个抽象模型的现实实现版本, 用于对接外部的不同平台
+        * Rules API，提供接口给外部调用以管理Pilot，包括命令行工具Istioctl以及未来可能出现的第三方管理界面
+        * Abstract Model：是对服务网格中”服务”的规范表示, 即定义在istio中什么是服务，这个规范独立于底层平台。
+        * Platform Adapter：这里有各种平台的实现，目前支持Kubernetes,Consul和Eureka。
+    </section>
+    <section data-markdown>
+        ## 功能
+        * 请求路由
+        * 服务发现和负载均衡
+        * 故障处理
+        * 故障注入
+        * 规则配置
+    </section>
+    <section data-markdown>
+        <h2>Mixer</h2>
+        <img src="ppts/serviceMesh/Mixer.png" width="50%" height="40%">
+    </section>
+    <section data-markdown>
+        ## Mixer
+        * 前提条件检查。允许服务在响应来自服务消费者的传入请求之前验证一些前提条件。前提条件包括认证，黑白名单，ACL检查等等。
+        * 配额管理。使服务能够在多个维度上分配和释放配额。典型例子如限速。
+        * 遥测报告。使服务能够上报日志和监控。
+    </section>
+    <section data-markdown>
+        <h2>Mixer</h2>
+        <img src="ppts/serviceMesh/machine.svg" width="50%" height="40%">
+    </section>
+    <section data-markdown>
+        <h2>例子</h2>
+        <img src="ppts/serviceMesh/withistio.svg" width="50%" height="40%">
+    </section>
+
+    <section data-markdown>
+
+    </section>
+
+</section>
+
+<section>
+    ## 完
 </section>
