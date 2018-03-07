@@ -24,7 +24,7 @@
     <!--[if lt IE 9]>
     <script src="reveal/lib/js/html5shiv.js"></script>
     <![endif]-->
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="jquery.js"></script>
 </head>
 
 <body>
@@ -37,7 +37,8 @@
 
 <script>
     jQuery(function () {
-        var path = "ppts/serviceMesh/"
+//        var path = "ppts/serviceMesh/"
+        var path = "ppts/springCloudMS/"
         var sections = path + "sections.html"
         jQuery.get(sections, function (data) {
             jQuery(".slides").html(data)
