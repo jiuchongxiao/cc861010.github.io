@@ -9,8 +9,8 @@
      
 基本上spring boot这种快速方法的开发规范已经成了我们事实上的标准  
 
-今年在spring boot的基础上发布了spring cloud系列的例子和最佳实践，配合服务自动化
-也提供构建分布式应用开发的另一个选择
+今年在spring boot的基础上发布了spring cloud系列的例子和最佳实践，配合运维自动化
+提供了构建分布式应用开发的另一个选择
 
 ## 二：组成
 spring cloud 主要由：
